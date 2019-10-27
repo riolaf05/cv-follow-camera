@@ -1,4 +1,5 @@
 # import the necessary packages
+import pyarrow
 from imutils.video import VideoStream
 from imutils.video import FPS
 import numpy as np
