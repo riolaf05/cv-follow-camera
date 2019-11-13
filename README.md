@@ -1,9 +1,9 @@
 # cv-follow-camera
 This code allows Raspberry Pi camera module to be used to follow object using computer vision
 
-##Installation on Raspberry Pi 3
+## Installation on Raspberry Pi 3
 
-# Dependencies
+### Dependencies
 ```console
 pip install pyarrow \
 && pip install numpy \ 
