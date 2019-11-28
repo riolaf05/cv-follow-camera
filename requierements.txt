@@ -1,0 +1,12 @@
+- install CV2 on Raspberry PI:
+sudo apt-get install python-opencv
+sudo apt-get install python-scipy
+sudo apt-get install ipython
+sudo apt install libqt4-test
+
+- install pyarrow on Raspberry Pi:
+???
+
+- other requierements:
+
+pip3 install numpy argparse imutils time 
