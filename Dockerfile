@@ -1,7 +1,7 @@
 FROM rio05docker/tflite_rpi:rpi3_test_2
 
 #Installing OpenCV and other pip packages
-RUN pip install imutils argparse python-opencv jupyter --user  
+RUN pip3 install imutils argparse python-opencv jupyter --user  
 #RUN pip install pyarrow --user 
 
 # Installing dependencies
