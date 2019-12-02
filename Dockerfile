@@ -1,8 +1,9 @@
 FROM rio05docker/tflite_rpi:rpi3_test_2
 
 #Installing OpenCV and other pip packages
-RUN pip3 install imutils argparse python-opencv jupyter --user  
+RUN pip3 install imutils argparse jupyter --user  
 #RUN pip install pyarrow --user 
+#RUN pip install python-opencv  --user #TODO: problem..unable to find python-opencv on Debian buster!
 
 # Installing dependencies
 RUN apt-get install -y libatlas-base-dev \ 
