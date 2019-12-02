@@ -1,15 +1,19 @@
-FROM arm32v7/python:3.5-buster 
+FROM rio05docker/tflite_rpi:rpi3_test_2
 
-RUN mkdir /root/scripts
+RUN pip install imutils argparse python-opencv --user 
 
-WORKDIR /root/scripts
+RUN apt-get install -y libatlas-base-dev \ 
+apt-get install -y libjasper-dev \
+apt-get install -y libqtgui4 \
+apt-get install -y python3-pyqt5
 
-RUN wget 'https://dl.google.com/coral/python/tflite_runtime-1.14.0-cp35-cp35m-linux_armv7l.whl'
 
-RUN pip3 install tflite_runtime-1.14.0-cp35-cp35m-linux_armv7l.whl
-
-RUN pip3 install numpy
-
-RUN mkdir /root/scripts/models
-
-COPY models/rss_model.h5 /root/scripts/models
+pip install pyarrow --user \
+&& pip install numpy --user \ 
+&& pip install imutils --user \
+&& pip install python-opencv --user \
+&& pip install argparse --user \ 
+&& sudo apt-get install -y libatlas-base-dev \
+&& sudo apt-get install -y libjasper-dev \
+&& sudo apt-get install -y libqtgui4 \
+&& sudo apt-get install -y python3-pyqt5
