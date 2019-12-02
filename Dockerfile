@@ -29,7 +29,7 @@ RUN conda update --all
 RUN mkdir /root/notebooks
 ENV PATH /root/.local/bin/jupyter-notebook:$PATH
 RUN jupyter notebook --generate-config --allow-root
-RUN echo "c.NotebookApp.password = u'sha1:6a3f528eec40:6e896b6e4828f525a6e20e5411cd1c8075d68619'" >> /root/.jupyter/jupyter_notebook_config.py
+RUN echo "c.NotebookApp.password = u'sha1:dfffed19ed8c:a177ca4460cfec9f5064ed5fc21c4bd7f490943a'" >> /root/.jupyter/jupyter_notebook_config.py
 
 # Jupyter listens port: 8888
 EXPOSE 8888
