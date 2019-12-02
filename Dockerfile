@@ -31,6 +31,10 @@ ENV PATH /root/.local/bin/:$PATH
 RUN jupyter notebook --generate-config --allow-root
 RUN echo "c.NotebookApp.password = u'sha1:dfffed19ed8c:a177ca4460cfec9f5064ed5fc21c4bd7f490943a'" >> /root/.jupyter/jupyter_notebook_config.py
 
+#Test to fix kernel error in jupyter
+RUN apt-get install python3-matplotlib \  
+&& apt-get install python3-scipy 
+
 # Jupyter listens port: 8888
 EXPOSE 8888
 
