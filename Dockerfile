@@ -8,7 +8,7 @@ RUN pip3 install imutils argparse jupyter --user
 # Installing dependencies
 RUN apt-get update \
 && apt-get install -y libatlas-base-dev \ 
-&& apt-get install -y libjasper-dev \
+#&& apt-get install -y libjasper-dev \ #needed for opencv
 && apt-get install -y libqtgui4 \
 && apt-get install -y python3-pyqt5
 
