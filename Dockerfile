@@ -6,7 +6,8 @@ RUN pip3 install imutils argparse jupyter --user
 #RUN pip install python-opencv  --user #TODO: problem..unable to find python-opencv on Debian buster!
 
 # Installing dependencies
-RUN apt-get install -y libatlas-base-dev \ 
+RUN apt-get update \
+&& apt-get install -y libatlas-base-dev \ 
 && apt-get install -y libjasper-dev \
 && apt-get install -y libqtgui4 \
 && apt-get install -y python3-pyqt5
