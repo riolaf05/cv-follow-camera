@@ -35,4 +35,4 @@ RUN echo "c.NotebookApp.password = u'sha1:dfffed19ed8c:a177ca4460cfec9f5064ed5fc
 EXPOSE 8888
 
 # Run Jupytewr notebook as Docker main process
-CMD ["jupyter", "notebook", "--notebook-dir=/root/notebooks", "--ip='*'", "--port=8888", "--no-browser"]
+CMD ["jupyter", "notebook", "--allow-root", "--notebook-dir=/root/notebooks", "--ip='*'", "--port=8888", "--no-browser"]
