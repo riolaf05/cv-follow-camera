@@ -26,13 +26,13 @@ RUN conda update conda -y
 RUN conda update --all
 
 # Configuring access to Jupyter
-#RUN mkdir /root/notebooks
-#ENV PATH /root/.local/bin/jupyter-notebook:$PATH
-#RUN jupyter notebook --generate-config --allow-root
-#RUN echo "c.NotebookApp.password = u'sha1:dfffed19ed8c:a177ca4460cfec9f5064ed5fc21c4bd7f490943a'" >> /root/.jupyter/jupyter_notebook_config.py
+RUN mkdir /root/notebooks
+ENV PATH /root/.local/bin/:$PATH
+RUN jupyter notebook --generate-config --allow-root
+RUN echo "c.NotebookApp.password = u'sha1:dfffed19ed8c:a177ca4460cfec9f5064ed5fc21c4bd7f490943a'" >> /root/.jupyter/jupyter_notebook_config.py
 
 # Jupyter listens port: 8888
 EXPOSE 8888
 
 # Run Jupytewr notebook as Docker main process
-#CMD ["jupyter", "notebook", "--allow-root", "--notebook-dir=/home/ubuntu/notebooks", "--ip='*'", "--port=8888", "--no-browser"]
+CMD ["jupyter", "notebook", "--allow-root", "--notebook-dir=/home/ubuntu/notebooks", "--ip='*'", "--port=8888", "--no-browser"]
