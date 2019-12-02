@@ -19,7 +19,7 @@ RUN bash Miniconda3-latest-Linux-armv7l.sh -b
 RUN rm Miniconda3-latest-Linux-armv7l.sh
 
 # Set path to conda
-ENV PATH /root/anaconda3/bin:$PATH
+ENV PATH /root/miniconda3/bin:$PATH
 
 # Updating Miniconda packages
 RUN conda update conda -y
