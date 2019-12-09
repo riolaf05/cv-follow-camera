@@ -46,13 +46,11 @@ def detect_objects(interpreter, image, threshold):
   """Returns a list of detection results, each a dictionary of object info."""
   set_input_tensor(interpreter, image)
   interpreter.invoke()
-
   # Get all output details
   boxes = get_output_tensor(interpreter, 0)
   classes = get_output_tensor(interpreter, 1)
   scores = get_output_tensor(interpreter, 2)
   count = int(get_output_tensor(interpreter, 3))
-
   results = []
   for i in range(count):
     if scores[i] >= threshold:
@@ -75,11 +73,9 @@ def annotate_objects(annotator, results, labels):
     xmax = int(xmax * CAMERA_WIDTH)
     ymin = int(ymin * CAMERA_HEIGHT)
     ymax = int(ymax * CAMERA_HEIGHT)
-
     # Overlay the box, label, and score on the camera preview
     annotator.bounding_box([xmin, ymin, xmax, ymax])
-    annotator.text([xmin, ymin],
-                   '%s\n%.2f' % (labels[obj['class_id']], obj['score']))
+    annotator.text([xmin, ymin], '%s\n%.2f' % (labels[obj['class_id']], obj['score']))
 
 def main():
   parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
@@ -88,7 +84,7 @@ def main():
   parser.add_argument('--threshold', help='Score threshold for detected objects.', required=False, type=float, default=0.4)
   args = parser.parse_args()
 
-  labels = load_labels("/home/scripts/coco_labels.txt")
-  interpreter = Interpreter("/home/scripts/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite")
+  labels = load_labels("/home/scripts/models/detect.tflite")
+  interpreter = Interpreter("/home/scripts/models/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite")
   interpreter.allocate_tensors()
   _, input_height, input_width, _ = interpreter.get_input_details()[0]['shape']
