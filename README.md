@@ -15,3 +15,7 @@ pip install pyarrow --user \
 && sudo apt-get install -y libqtgui4 \
 && sudo apt-get install -y python3-pyqt5
 ```
+
+## Installation with Docker
+
+Follow the instructions on tflite and opencv folders
