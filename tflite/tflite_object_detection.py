@@ -88,7 +88,7 @@ def main():
   parser.add_argument('--threshold', help='Score threshold for detected objects.', required=False, type=float, default=0.4)
   args = parser.parse_args()
 
-  labels = load_labels(args.labels)
-  interpreter = Interpreter(args.model)
+  labels = load_labels("/home/scripts/coco_labels.txt")
+  interpreter = Interpreter("/home/scripts/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite")
   interpreter.allocate_tensors()
   _, input_height, input_width, _ = interpreter.get_input_details()[0]['shape']

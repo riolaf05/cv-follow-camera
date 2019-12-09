@@ -2,7 +2,7 @@
 
 Dockerfile is based on Raspbian Stretch, it contains:
 
-* Python3.5
+* Python3.5 (**only use Python3.5**)
 * Tensorflow Lite 1.14
 * Miniconda3
 * Picamera and other Raspberry Pi tools
