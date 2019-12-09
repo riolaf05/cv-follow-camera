@@ -81,3 +81,14 @@ def annotate_objects(annotator, results, labels):
     annotator.text([xmin, ymin],
                    '%s\n%.2f' % (labels[obj['class_id']], obj['score']))
 
+def main():
+  parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+  #parser.add_argument('--model', help='File path of .tflite file.', required=True)
+  #parser.add_argument('--labels', help='File path of labels file.', required=True)
+  parser.add_argument('--threshold', help='Score threshold for detected objects.', required=False, type=float, default=0.4)
+  args = parser.parse_args()
+
+  labels = load_labels(args.labels)
+  interpreter = Interpreter(args.model)
+  interpreter.allocate_tensors()
+  _, input_height, input_width, _ = interpreter.get_input_details()[0]['shape']

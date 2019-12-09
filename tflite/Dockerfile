@@ -6,4 +6,5 @@ RUN chmod +x /home/scripts/models/download.sh
 RUN /home/scripts/models/download.sh
 
 #Copy demo file
+RUN apt-get install zip
 COPY ./tflite/pi_image_classifier_tflite_demo.py /home/scripts
