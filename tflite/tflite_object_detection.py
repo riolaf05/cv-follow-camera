@@ -88,3 +88,5 @@ def main():
   interpreter = Interpreter("/home/scripts/detect.tflite")
   interpreter.allocate_tensors()
   _, input_height, input_width, _ = interpreter.get_input_details()[0]['shape']
+
+  
