@@ -85,6 +85,6 @@ def main():
   args = parser.parse_args()
 
   labels = load_labels("/home/scripts/models/coco_labels.txt")
-  interpreter = Interpreter("/home/scripts/detect.tflit")
+  interpreter = Interpreter("/home/scripts/detect.tflite")
   interpreter.allocate_tensors()
   _, input_height, input_width, _ = interpreter.get_input_details()[0]['shape']
