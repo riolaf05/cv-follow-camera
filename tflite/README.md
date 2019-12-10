@@ -23,6 +23,6 @@ docker push rio05docker/ai_obj_detection_camera:rpi3_test_1
 To run with Raspberry Camera (assumes the camera appears as /dev/vidoe0 on the Raspberry Pi):
 
 ```console
-docker run -it --restart unless-stopped --privileged --device /dev/vidoe0 --name pi_obj_detection rio05docker/tflite_rpi3_tpu:rpi3_test_4 python /home/scripts/tflite_object_detection.py
+docker run -it --restart unless-stopped --privileged --device /dev/vidoe0 --name pi_obj_detection rio05docker/tflite_rpi:rpi3_test_4.1 python3.5 /home/scripts/tflite_object_detection.py
 ```
 
