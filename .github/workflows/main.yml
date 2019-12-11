@@ -35,7 +35,7 @@ jobs:
         name: Build and push Tensorflow Lite container #see: https://github.com/marketplace/actions/docker-buildx
         run: |
           docker buildx build \
-            --tag rio05docker/ai_obj_detection_camera:rpi3_develop_${GITHUB_SHA} \
+            --tag rio05docker/ai_obj_detection_camera:rpi3_test_${GITHUB_SHA} \
             --platform linux/arm/v7 \
             --output "type=image,push=true" \
             --file ./tflite/Dockerfile \
