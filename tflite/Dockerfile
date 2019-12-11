@@ -65,7 +65,8 @@ RUN chmod +x /home/scripts/models/download.sh
 RUN bash /home/scripts/models/download.sh
 
 #Copy demo file
-COPY ./tflite_object_detection.py /home/scripts
+COPY ./tflite_object_detection_demo.py /home/scripts
+COPY ./annotation.py /home/scripts
 
 #Copy test file
 COPY ./test/tflite_object_detection_test.py /home/scripts
