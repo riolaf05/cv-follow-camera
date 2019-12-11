@@ -90,10 +90,17 @@ interpreter.allocate_tensors()
 _, input_height, input_width, _ = interpreter.get_input_details()[0]['shape']
 
 
-image = Image.open("/home/scripts/samples/car.jpg")
+image = Image.open("/home/scripts/samples/cane_gatto.jpg")
 image=image.convert('RGB').resize((input_height, input_height), Image.ANTIALIAS)
 results = detect_objects(interpreter, image, 0.4)
 print(labels[results[0]['class_id']])
+for element in results:
+  ymin, xmin, ymax, xmax = element['bounding_box']
+  xmin = int(xmin * CAMERA_WIDTH)
+  xmax = int(xmax * CAMERA_WIDTH)
+  ymin = int(ymin * CAMERA_HEIGHT)
+  ymax = int(ymax * CAMERA_HEIGHT)
+  print("must move camera ", (xmin*100)/CAMERA_WIDTH, "% from left")
 
 #if __name__ == '__main__':
  # main()
