@@ -9,3 +9,6 @@ RUN bash /home/scripts/models/download.sh
 
 #Copy demo file
 COPY ./tflite_object_detection.py /home/scripts
+
+#Copy test file
+COPY ./test/tflite_object_detection_test.py /home/scripts
