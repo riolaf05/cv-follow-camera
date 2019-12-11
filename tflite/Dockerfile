@@ -9,13 +9,15 @@ RUN mkdir /home/scripts/models
 RUN apt-get update
 
 #Install Python3
-RUN apt-get install -y build-essential tk-dev libncurses5-dev libncursesw5-dev libreadline6-dev libdb5.3-dev libgdbm-dev libsqlite3-dev libssl-dev libbz2-dev libexpat1-dev liblzma-dev zlib1g-dev
-RUN wget https://www.python.org/ftp/python/3.6.5/Python-3.6.5.tar.xz \
-&& tar xf Python-3.6.5.tar.xz \
-&& cd Python-3.6.5 \
-&& ./configure \
-&& make \
-&& make altinstall
+#RUN apt-get install -y build-essential tk-dev libncurses5-dev libncursesw5-dev libreadline6-dev libdb5.3-dev libgdbm-dev libsqlite3-dev libssl-dev libbz2-dev libexpat1-dev liblzma-dev zlib1g-dev
+#RUN wget https://www.python.org/ftp/python/3.6.5/Python-3.6.5.tar.xz \
+#&& tar xf Python-3.6.5.tar.xz \
+#&& cd Python-3.6.5 \
+#&& ./configure \
+#&& make \
+#&& make altinstall
+
+RUN apt-get install python3
 
 #Cleaning python installation junk
 RUN cd ..
