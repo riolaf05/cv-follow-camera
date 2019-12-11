@@ -3,15 +3,27 @@ This code allows Raspberry Pi camera module to be used to follow object using co
 
 ## Installation on Raspberry Pi 3
 
-### Dependencies
+### Dependencies (OpenCV only)
+
+```console
+apt-get install python-opencv \
+&& apt-get install python-scipy \
+&& apt-get install ipython \
+&& apt install libqt4-test
+&& apt-get install -y libatlas-base-dev \
+&& apt-get install -y libjasper-dev \
+&& apt-get install -y libqtgui4 \
+&& apt-get install -y python3-pyqt5
+```
+
 ```console
 pip install pyarrow --user \
 && pip install numpy --user \ 
 && pip install imutils --user \
 && pip install python-opencv --user \
 && pip install argparse --user \ 
-&& sudo apt-get install -y libatlas-base-dev \
-&& sudo apt-get install -y libjasper-dev \
-&& sudo apt-get install -y libqtgui4 \
-&& sudo apt-get install -y python3-pyqt5
 ```
+
+## Installation with Docker
+
+Follow the instructions on tflite and opencv folders
