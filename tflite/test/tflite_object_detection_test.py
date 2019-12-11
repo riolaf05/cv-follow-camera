@@ -77,43 +77,23 @@ def annotate_objects(annotator, results, labels):
     annotator.bounding_box([xmin, ymin, xmax, ymax])
     annotator.text([xmin, ymin], '%s\n%.2f' % (labels[obj['class_id']], obj['score']))
 
-def main():
-  parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+#def main():
+  #parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter)
   #parser.add_argument('--model', help='File path of .tflite file.', required=True)
   #parser.add_argument('--labels', help='File path of labels file.', required=True)
-  parser.add_argument('--threshold', help='Score threshold for detected objects.', required=False, type=float, default=0.4)
-  args = parser.parse_args()
+  #parser.add_argument('--threshold', help='Score threshold for detected objects.', required=False, type=float, default=0.4)
+  #args = parser.parse_args()
 
-  labels = load_labels("/home/scripts/models/coco_labels.txt")
-  interpreter = Interpreter("/home/scripts/detect.tflite")
-  interpreter.allocate_tensors()
-  _, input_height, input_width, _ = interpreter.get_input_details()[0]['shape']
-
-  with picamera.PiCamera(resolution=(CAMERA_WIDTH, CAMERA_HEIGHT), framerate=30) as camera:
-    camera.start_preview()
-    try:
-      stream = io.BytesIO()
-      annotator = Annotator(camera)
-      for _ in camera.capture_continuous(
-          stream, format='jpeg', use_video_port=True):
-        stream.seek(0)
-        image = Image.open(stream).convert('RGB').resize(
-            (input_width, input_height), Image.ANTIALIAS)
-        start_time = time.monotonic()
-        results = detect_objects(interpreter, image, args.threshold)
-        elapsed_ms = (time.monotonic() - start_time) * 1000
-
-        annotator.clear()
-        annotate_objects(annotator, results, labels)
-        annotator.text([5, 0], '%.1fms' % (elapsed_ms))
-        annotator.update()
-
-        stream.seek(0)
-        stream.truncate()
-
-    finally:
-      camera.stop_preview()
+labels = load_labels("/home/scripts/models/labelmap.txt")
+interpreter = Interpreter("/home/scripts/models/detect.tflite")
+interpreter.allocate_tensors()
+_, input_height, input_width, _ = interpreter.get_input_details()[0]['shape']
 
 
-if __name__ == '__main__':
-  main()
+image = Image.open("/home/scripts/samples/car.jpg")
+image=image.convert('RGB').resize((input_height, input_height), Image.ANTIALIAS)
+results = detect_objects(interpreter, image, 0.4)
+print(labels[results[0]['class_id']])
+
+#if __name__ == '__main__':
+ # main()
