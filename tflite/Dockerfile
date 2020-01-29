@@ -40,7 +40,10 @@ RUN apt-get install libjpeg-dev -y \
 && apt-get install liblcms1-dev -y \
 && apt-get install libopenjp2-7 -y \
 && apt-get install libtiff5 -y \
-&& apt-get install -y libraspberrypi0 libraspberrypi-dev libraspberrypi-doc libraspberrypi-bin
+&& apt-get install libraspberrypi0 -y \
+&& apt-get install libraspberrypi-dev -y \
+&& apt-get install libraspberrypi-doc -y \
+&& apt-get install libraspberrypi-bin -y
 
 #Installing picamera, jupyter and other pip packages
 RUN pip3 install numpy --user
