@@ -1,7 +1,14 @@
 # cv-follow-camera
-This code allows Raspberry Pi camera module to be used to follow object using computer vision
+This is a Tensorflow based object detection container which can be used to drive a RaspberyyPi-powered servo motor to point a selected object. 
 
-## Install on Raspberry Pi 3
+This repo contains a continuous integration pipeline which automatically build the container.
+
+## Install with Docker and Coral Edge TPU
+
+Follow the instructions on tflite_edge_tpu folder.
+
+## Install with Docker 
+TODO
 
 ### Dependencies
 
@@ -23,10 +30,3 @@ pip install pyarrow --user \
 && pip install python-opencv --user \
 && pip install argparse --user \ 
 ```
-
-## Install with Docker and Coral Edge TPU
-
-Follow the instructions on tflite_edge_tpu folder.
-
-## Install with Docker 
-TODO
