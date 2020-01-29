@@ -8,7 +8,7 @@ def SetAngle(angle, servoPIN):
 	sleep(1)
 	GPIO.output(03, False)
 
-def move_servo(x0, x1):
+def move_servo(x0):
 
     servoPIN = 17
     GPIO.setmode(GPIO.BCM)

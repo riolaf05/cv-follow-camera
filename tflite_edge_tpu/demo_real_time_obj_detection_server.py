@@ -12,6 +12,8 @@ import picamera
 import cv2
 from PIL import Image
 
+from serve_driver
+
 import numpy as np
 from edgetpu.detection.engine import DetectionEngine
 
@@ -79,7 +81,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
         self.send_header('Content-type', 'text/html')
         self.end_headers()
 
-    def append_objs_to_img(self, cv2_im, objs, labels):
+    def coordinates_to_servo(self, cv2_im, objs, labels):
         height, width, channels = cv2_im.shape
         for obj in objs:
             x0, y0, x1, y1 = obj.bounding_box.flatten().tolist()
@@ -90,6 +92,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
             cv2_im = cv2.rectangle(cv2_im, (x0, y0), (x1, y1), (0, 255, 0), 2)
             cv2_im = cv2.putText(cv2_im, label, (x0, y0+30),
                                 cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 0, 0), 2)
+            move_servo(x0)
         return cv2_im
 
     def authorized_get(self):
@@ -135,7 +138,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
                                     top_k=args.top_k)
                     elapsed_ms = time.time() - start_ms
 
-                    cv2_im = self.append_objs_to_img(cv2_im, objs, labels)
+                    cv2_im = self.coordinates_to_servo(cv2_im, objs, labels)
 
                     r, buf = cv2.imencode(".jpg", cv2_im)
 
@@ -184,9 +187,4 @@ if __name__ == '__main__':
         camera.vflip = VFLIP
         camera.rotation = ROTATION
 
-        try:
-            address = ('', 8000)
-            server = StreamingServer(address, StreamingHandler)
-            server.serve_forever()
-        except:
-            print("error on the server!")
+        
