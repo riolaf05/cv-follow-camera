@@ -1,9 +1,9 @@
 # cv-follow-camera
 This code allows Raspberry Pi camera module to be used to follow object using computer vision
 
-## Installation on Raspberry Pi 3
+## Install on Raspberry Pi 3
 
-### Dependencies (OpenCV only)
+### Dependencies
 
 ```console
 apt-get install python-opencv \
@@ -24,6 +24,9 @@ pip install pyarrow --user \
 && pip install argparse --user \ 
 ```
 
-## Installation with Docker
+## Install with Docker and Coral Edge TPU
 
-Follow the instructions on tflite and opencv folders
+Follow the instructions on tflite_edge_tpu folder.
+
+## Install with Docker 
+TODO
