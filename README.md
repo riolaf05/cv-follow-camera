@@ -1,4 +1,4 @@
-# cv-follow-camera
+# Computer Vision auto-follow camera
 This is a Tensorflow based object detection container which can be used to drive a RaspberyyPi-powered servo motor to point a selected object. 
 
 This repo contains a continuous integration pipeline which automatically build the container.
