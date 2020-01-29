@@ -15,7 +15,7 @@ It must run on RaspberryPi with Edge TPU Coral device
 
 1. Follow this istructions to plug the servo motor:
 
-![image](https://github.com/riolaf05/cv-follow-camera/tree/develop/images/servo.png)
+![image](https://github.com/riolaf05/cv-follow-camera/blob/master/images/servo.png)
 
 2. Use CI/CD pipeline to build.
 
