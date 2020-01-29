@@ -25,7 +25,7 @@ It must run on RaspberryPi with Edge TPU Coral device
 docker run -it --rm --privileged -p 8000:8000 -v /dev/bus/usb:/dev/bus/usb --device=/dev/vchiq --rm rio05docker/ai_obj_detection_camera:rpi3_rt_tflite_tpu_${GITHUB_SHA}
 ```
 
-4. hen exec the container and run: 
+4. exec the container and run: 
 
 ```console
 python3 demo_real_time_obj_detection_server.py --model /tmp/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite --label /tmp/coco_labels.txt
