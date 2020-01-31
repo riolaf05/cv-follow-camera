@@ -15,7 +15,7 @@ It must run on RaspberryPi with Edge TPU Coral device
 
 1. Follow this istructions to plug the servo motor:
 
-![image](https://github.com/riolaf05/cv-follow-camera/tree/develop/images/servo.png)
+![image](https://github.com/riolaf05/cv-follow-camera/blob/master/images/servo.png)
 
 2. Use CI/CD pipeline to build.
 
@@ -25,7 +25,7 @@ It must run on RaspberryPi with Edge TPU Coral device
 docker run -it --rm --privileged -p 8000:8000 -v /dev/bus/usb:/dev/bus/usb --device=/dev/vchiq --rm rio05docker/ai_obj_detection_camera:rpi3_rt_tflite_tpu_${GITHUB_SHA}
 ```
 
-4. hen exec the container and run: 
+4. exec the container and run: 
 
 ```console
 python3 demo_real_time_obj_detection_server.py --model /tmp/mobilenet_ssd_v2_coco_quant_postprocess_edgetpu.tflite --label /tmp/coco_labels.txt
