@@ -12,10 +12,12 @@ import picamera
 import cv2
 from PIL import Image
 
-from serve_driver
-
 import numpy as np
 from edgetpu.detection.engine import DetectionEngine
+import RPi.GPIO as GPIO
+import time
+
+from servo_driver import get_pwm, move_servo
 
 # Parameters
 AUTH_USERNAME = os.environ.get('AUTH_USERNAME', 'pi')
@@ -81,7 +83,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
         self.send_header('Content-type', 'text/html')
         self.end_headers()
 
-    def coordinates_to_servo(self, cv2_im, objs, labels):
+    def append_objs_to_img(self, cv2_im, objs, labels):
         height, width, channels = cv2_im.shape
         for obj in objs:
             x0, y0, x1, y1 = obj.bounding_box.flatten().tolist()
@@ -89,10 +91,13 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
             percent = int(100 * obj.score)
             label = '%d%% %s' % (percent, labels[obj.label_id])
 
+            if labels[obj.label_id] == os.getenv('OBJECT'): #and percent > 70:
+                print(obj.label_id, 'point: ', (x0+x1)/2)
+                move_servo((x0+x1)/2)
+
             cv2_im = cv2.rectangle(cv2_im, (x0, y0), (x1, y1), (0, 255, 0), 2)
             cv2_im = cv2.putText(cv2_im, label, (x0, y0+30),
                                 cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 0, 0), 2)
-            move_servo(x0)
         return cv2_im
 
     def authorized_get(self):
@@ -120,17 +125,17 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 
                 while True:
                     # getting image
-                    camera.capture(stream_video, 
-                                format='jpeg', 
+                    camera.capture(stream_video,
+                                format='jpeg',
                                 use_video_port=True)
                     stream_video.truncate()
                     stream_video.seek(0)
-                    
+
                     # cv2 / PIL coding
                     cv2_im = np.frombuffer(stream_video.getvalue(), dtype=np.uint8)
                     cv2_im = cv2.imdecode(cv2_im, 1)
                     pil_im = Image.fromarray(cv2_im)
-                    
+
                     # object detection
                     start_ms = time.time()
                     objs = engine.detect_with_image(pil_im, threshold=args.threshold,
@@ -138,7 +143,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
                                     top_k=args.top_k)
                     elapsed_ms = time.time() - start_ms
 
-                    cv2_im = self.coordinates_to_servo(cv2_im, objs, labels)
+                    cv2_im = self.append_objs_to_img(cv2_im, objs, labels)
 
                     r, buf = cv2.imencode(".jpg", cv2_im)
 
@@ -148,7 +153,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
                     self.end_headers()
                     self.wfile.write(bytearray(buf))
                     self.wfile.write(b'\r\n')
-                    
+
 
             except Exception as e:
                 logging.warning(
@@ -187,4 +192,9 @@ if __name__ == '__main__':
         camera.vflip = VFLIP
         camera.rotation = ROTATION
 
-        
+        try:
+            address = ('', 8000)
+            server = StreamingServer(address, StreamingHandler)
+            server.serve_forever()
+        except:
+            print("error on the server!")
