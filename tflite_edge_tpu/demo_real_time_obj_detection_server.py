@@ -93,7 +93,7 @@ class StreamingHandler(server.BaseHTTPRequestHandler):
 
             if labels[obj.label_id] == os.getenv('OBJECT'): #and percent > 70:
                 print(obj.label_id, 'point: ', (x0+x1)/2)
-                move_servo((x0+x1)/2)
+                move_servo((((x0+x1)/2)*180)/600)
 
             cv2_im = cv2.rectangle(cv2_im, (x0, y0), (x1, y1), (0, 255, 0), 2)
             cv2_im = cv2.putText(cv2_im, label, (x0, y0+30),
